@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { gitAddCommander, gitStatusCommander, gitCommitCommander } from './gitScripts.js';
+import { gitAddCommander, gitStatusCommander, gitCommitCommander, gitPushCommander } from './gitScripts.js';
 import chalk from 'chalk';
 
 // 获取项目的根目录
@@ -43,6 +43,10 @@ function checkEmptyDirectories(dirPath) {
 checkEmptyDirectories(projectRoot);
 // 自动添加所有文件到 git
 
-gitAddCommander()
-gitStatusCommander()
-gitCommitCommander()
+(async () => {
+    gitAddCommander()
+    gitStatusCommander()
+    await gitCommitCommander()
+    await gitPushCommander()
+})()
+
